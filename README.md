@@ -58,15 +58,13 @@ HelloCV/
       ros2 doctor
     出现一些警告是正常的，只是一些内容的提醒更新而已，可以自行解决，这里搁置。
 
-  OpenCV 4.5.4
+  OpenCV 4.5.4（基础版，根据需求选择，可跳过本段并在【综合配置】中安装完整版）
       sudo apt install -y python3-pip
       pip3 install --upgrade pip
       pip install opencv-python
     简单的指令，平平淡淡才是真，借助pip安装
     验证安装
       python3 -c "import cv2; print('OpenCV 安装成功! 版本:', cv2.__version__)"
-    难得容易，感动，不过事情真的如此简单吗？事实上我们后面还要做一些综合性的调试。
-    该来的总是会来的.jpg
 
   VS Code
     通过snap安装
@@ -101,23 +99,59 @@ HelloCV/
       sudo apt install -y build-essential cmake git curl wget
       sudo apt install -y python3-pip python3-venv python3-dev
     然后是py开发（是python！不要做奇怪的联想！）环境
-
-
-
-
-
-
-
-
-
-
-
+      创建
+      cd ~/dev_workspace
+      python3 -m venv venv
+      激活
+      source venv/bin/activate
+      安装
+      pip install --upgrade pip
+      pip install numpy matplotlib jupyter ipykernel pillow
+      pip install opencv-contrib-python
+      pip install black pylint autopep8
+      添加虚拟环境
+      python -m ipykernel install --user --name=dev_workspace --display-name="Python (Dev Workspace)"
+    完善VS Code配置
+      cd ~/dev_workspace
+      mkdir -p .vscode
+      cat > .vscode/settings.json << 'EOF'
+      {
+    "python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python",
+    "editor.fontSize": 14,
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
+    "files.autoSave": "afterDelay",
+    "terminal.integrated.defaultProfile.linux": "bash"
+    }
+    EOF
+     mkdir -p opencv_projects/{src,data}
+   创建一下测试功能
+     cat > test_environment.py << 'EOF'
+     import cv2
+     import numpy as np
+     import sys
+     print("=== 环境快速验证 ===")
+     print(f"Python: {sys.version}")
+     print(f"OpenCV: {cv2.__version__}")
+     img = np.ones((100, 100, 3), dtype=np.uint8) * 255
+     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+     print(f"图像处理测试: {img.shape} -> {gray.shape}")
+     print("✅ 环境验证通过！")
+     EOF
+   激活
+     cd ~/dev_workspace
+     source venv/bin/activate
+     python test_environment.py
+     python opencv_projects/src/quick_demo.py
+完成！Congratulations！
 
 
 使用方法
 git clone git@github.com:Msordina/HelloCV.git
 按照上述环境配置步骤配置环境。
 感谢观看
+
+
 
 
 
