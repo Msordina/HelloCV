@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/FileEncryptor.dir/src/main.cpp.o CMakeFiles/FileEncryptor.dir/src/Crypto.cpp.o CMakeFiles/FileEncryptor.dir/src/Filehandler.cpp.o CMakeFiles/FileEncryptor.dir/src/EncryptorApp.cpp.o -o bin/FileEncryptor 
